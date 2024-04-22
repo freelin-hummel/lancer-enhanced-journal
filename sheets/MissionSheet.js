@@ -161,7 +161,7 @@ export class MissionSheet extends EnhancedJournalSheet {
     }
 
     get type() {
-        returnmission';
+        return 'mission';
     }
 
     _documentControls() {
