@@ -160,7 +160,7 @@ export class EnhancedJournal extends Application {
 
         $('.directory-sidebar', this.element).empty().append(html);
 
-        //if (game.modules.get("forien-quest-log")?.active && !game.settings.get("forien-quest-log", 'showFolder')) {
+        //if (game.modules.get("forien-mission-log")?.active && !game.settings.get("forien-mission-log", 'showFolder')) {
         let folder = game.journal.directory.folders.find(f => (f.name == '_fql_quests' && f.parent == null));
         if (folder) {
             let elem = html.find(`.folder[data-folder-id="${folder.id}"]`);
@@ -1480,10 +1480,10 @@ export class EnhancedJournal extends Application {
                 }
             },
             {
-                name: i18n("MonksEnhancedJournal.quest"),
+                name: i18n("MonksEnhancedJournal.mission"),
                 icon: '<i class="fas fa-map-signs"></i>',
                 callback: li => {
-                    this.convert('quest');
+                    this.convert('mission');
                 }
             },
             {

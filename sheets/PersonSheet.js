@@ -23,7 +23,7 @@ export class PersonSheet extends EnhancedJournalSheet {
 
     /*
     get allowedRelationships() {
-        return ['organization', 'person', 'place', 'shop', 'quest', 'poi'];
+        return ['organization', 'person', 'place', 'shop',mission', 'poi'];
     }*/
 
     get type() {

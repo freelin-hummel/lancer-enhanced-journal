@@ -8,7 +8,7 @@ import { PersonSheet } from "./sheets/PersonSheet.js"
 import { PictureSheet } from "./sheets/PictureSheet.js"
 import { PlaceSheet } from "./sheets/PlaceSheet.js"
 import { PointOfInterestSheet } from "./sheets/PointOfInterestSheet.js"
-import { QuestSheet } from "./sheets/QuestSheet.js"
+import { MissionSheet } from "./sheets/MissionSheet.js"
 import { SlideshowSheet } from "./sheets/SlideshowSheet.js"
 import { OrganizationSheet } from "./sheets/OrganizationSheet.js"
 import { ShopSheet } from "./sheets/ShopSheet.js"
@@ -95,7 +95,7 @@ export class MonksEnhancedJournal {
             picture: PictureSheet,
             place: PlaceSheet,
             poi: PointOfInterestSheet,
-            quest: QuestSheet,
+          mission: MissionSheet,
             shop: ShopSheet,
             loot: LootSheet,
             slideshow: SlideshowSheet,
@@ -110,7 +110,7 @@ export class MonksEnhancedJournal {
             person: "MonksEnhancedJournal.person",
             place: "MonksEnhancedJournal.place",
             poi: "MonksEnhancedJournal.poi",
-            quest: "MonksEnhancedJournal.quest",
+          mission: "MonksEnhancedJournal.mission",
             encounter: "MonksEnhancedJournal.encounter",
             event: "MonksEnhancedJournal.event",
             organization: "MonksEnhancedJournal.organization",
@@ -437,7 +437,7 @@ export class MonksEnhancedJournal {
                 ...ownership.map(([name, level]) => ({ level, label: `OWNERSHIP.${name}` }))
             ];
             MonksEnhancedJournal.fixType(doc);
-            let hasImage = (doc instanceof JournalEntryPage) && ((["loot", "organization", "person", "place", "poi", "quest", "shop", "picture"].includes(doc.type) || (doc.type === "image")) && !!doc.src);
+            let hasImage = (doc instanceof JournalEntryPage) && ((["loot", "organization", "person", "place", "poi",mission", "shop", "picture"].includes(doc.type) || (doc.type === "image")) && !!doc.src);
 
             let showAs = doc.getFlag("monks-enhanced-journal", "showAs") || (doc.type == "image" ? "image" : options?.showAs || "journal");
             if (!hasImage && showAs != "journal")
@@ -807,7 +807,7 @@ export class MonksEnhancedJournal {
                     }, 500);
                 }
             } 
-            if (!!getProperty(this, "flags.forien-quest-log") || (options.renderSheet !== false && !MonksEnhancedJournal.openJournalEntry(this, options)))
+            if (!!getProperty(this, "flags.forien-mission-log") || (options.renderSheet !== false && !MonksEnhancedJournal.openJournalEntry(this, options)))
                 return wrapped(...args);
         }
 
@@ -826,7 +826,7 @@ export class MonksEnhancedJournal {
             if (game.user.id !== userid)
                 return;
 
-            if (!!getProperty(this, "flags.forien-quest-log") || (MonksEnhancedJournal.compendium !== true && !MonksEnhancedJournal.openJournalEntry(this, options)))
+            if (!!getProperty(this, "flags.forien-mission-log") || (MonksEnhancedJournal.compendium !== true && !MonksEnhancedJournal.openJournalEntry(this, options)))
                 return wrapped(...args);
         }
 
@@ -1589,9 +1589,9 @@ export class MonksEnhancedJournal {
 
         for (let journal of game.journal) {
             let type = journal.getFlag('monks-enhanced-journal', 'type');
-            if (["shop", "encounter", "quest"].includes(type)) {
+            if (["shop", "encounter",mission"].includes(type)) {
                 isFix = false;
-                if (type == "quest") {
+                if (type ==mission") {
                     let rewardFix = false;
                     let rewards = duplicate(journal.getFlag('monks-enhanced-journal', 'rewards') || []);
                     for (let reward of rewards) {
@@ -1666,7 +1666,7 @@ export class MonksEnhancedJournal {
                 }
 
                 //cheak to make sure the relationships go both ways
-                if (["person", "place", "organization", "shop", "quest"].includes(journal.type)) {
+                if (["person", "place", "organization", "shop",mission"].includes(journal.type)) {
                     let relationships = journal.getFlag('monks-enhanced-journal', 'relationships') || [];
                     for (let relationship of relationships) {
                         let other = game.journal.get(relationship.id);
@@ -2009,7 +2009,7 @@ export class MonksEnhancedJournal {
             MonksEnhancedJournal.fixType(doc);
 
             let sheet = (!doc?._sheet ? doc?._getSheetClass() : doc?._sheet);
-            if ((sheet?.name || sheet?.constructor?.name) == 'QuestPreviewShim')
+            if ((sheet?.name || sheet?.constructor?.name) == 'MissionPreviewShim')
                 return false;
             if ((sheet?.name || sheet?.constructor?.name) == 'NoteSheet')
                 return false;
@@ -2379,7 +2379,7 @@ export class MonksEnhancedJournal {
             case 'slideshow': return 'fa-photo-video';
             case 'encounter': return 'fa-toolbox';
             case 'event': return 'fa-calendar-days';
-            case 'quest': return 'fa-map-signs';
+            casemission': return 'fa-map-signs';
             case 'journalentry': return 'fa-book-open';
             case 'actor': return 'fa-users';
             case 'organization': return 'fa-flag';
@@ -2756,22 +2756,22 @@ export class MonksEnhancedJournal {
         let display = $('#objective-display').empty();
 
         if (setting('show-dialog')) {
-            let quests = $('<ul>');
-            //find all in progress quests
-            for (let quest of game.journal) {
-                if (quest.getFlag('monks-enhanced-journal', 'type') == 'quest' && quest.testUserPermission(game.user, "OBSERVER") && quest.getFlag('monks-enhanced-journal', 'display') && quest.getFlag('monks-enhanced-journal', 'display')) {
+            let missions = $('<ul>');
+            //find all in progress missions
+            for (let mission of game.journal) {
+                ifmission.getFlag('monks-enhanced-journal', 'type') ==mission' && mission.testUserPermission(game.user, "OBSERVER") && mission.getFlag('monks-enhanced-journal', 'display') && mission.getFlag('monks-enhanced-journal', 'display')) {
                     //find all objectives
                     let objectives = $('<ul>');
                     $('<li>')
-                        .attr('data-document-id', quest.id)
-                        .append(quest.getFlag('monks-enhanced-journal', 'completed') ? '<i class="fas fa-check"></i> ' : '')
-                        .append(`<b>${quest.name}</b>`)
+                        .attr('data-document-id', mission.id)
+                        .append(mission.getFlag('monks-enhanced-journal', 'completed') ? '<i class="fas fa-check"></i> ' : '')
+                        .append(`<b>${mission.name}</b>`)
                         .append(objectives)
                         .on('click', MonksEnhancedJournal.openObjectiveLink.bind(this))
-                        .appendTo(quests);
+                        .appendTo(missions);
 
                     if (setting('use-objectives')) {
-                        for (let objective of (quest.getFlag('monks-enhanced-journal', 'objectives') || [])) {
+                        for (let objective ofmission.getFlag('monks-enhanced-journal', 'objectives') || [])) {
                             if (objective.available) {
                                 let li = $('<li>').addClass('flexrow').append($('<span>').html(objective.title || objective.content)).attr('completed', objective.status);
                                 if ($.isNumeric(objective.required))
@@ -2783,8 +2783,8 @@ export class MonksEnhancedJournal {
                 }
             }
 
-            if (quests.children().length > 0) {
-                display.append($('<div>').addClass('title').html('Quests')).append(quests);
+            ifmissions.children().length > 0) {
+                display.append($('<div>').addClass('title').html('Missions')).append(missions);
             }
         }*/
     }
@@ -2867,7 +2867,7 @@ export class MonksEnhancedJournal {
                             }
                         }).appendTo(pageList);
 
-                    if (pageType == 'quest') {
+                    if (pageType ==mission') {
                         //let ownership = entry.ownership.default;
                         //let completed = entry.getFlag('monks-enhanced-journal', 'completed');
                         let status = page.getFlag('monks-enhanced-journal', 'status') || (page.getFlag('monks-enhanced-journal', 'completed') ? 'completed' : 'inactive');
@@ -2877,7 +2877,7 @@ export class MonksEnhancedJournal {
                 ui.journal._dragDrop.forEach(d => d.bind(pageList[0]));
             }*/
 
-            if (type == 'quest') {
+            if (type ==mission') {
                 //let ownership = entry.ownership.default;
                 //let completed = entry.getFlag('monks-enhanced-journal', 'completed');
                 let page = document.pages.contents[0];
@@ -3624,7 +3624,7 @@ export class MonksEnhancedJournal {
 
     static convertReward() {
         if (MonksEnhancedJournal.journal) {
-            if (!(MonksEnhancedJournal.journal.subsheet instanceof QuestSheet)) {
+            if (!(MonksEnhancedJournal.journal.subsheet instanceof MissionSheet)) {
                 console.log('Invalid journal type');
                 return;
             }
@@ -3879,7 +3879,7 @@ Hooks.on("updateJournalEntry", (document, data, options, userId) => {
 
 Hooks.on("updateJournalEntryPage", (document, data, options, userId) => {
     let type = getProperty(document, 'flags.monks-enhanced-journal.type');
-    if (type == 'quest')
+    if (type ==mission')
         MonksEnhancedJournal.refreshObjectives(true);
 
     if (data.name && type && document.parent.pages.size == 1) {
@@ -3925,7 +3925,7 @@ Hooks.on("updateJournalEntryPage", (document, data, options, userId) => {
 Hooks.on("deleteJournalEntry", (document, html, userId) => {
     if (MonksEnhancedJournal.journal) {
         MonksEnhancedJournal.journal.deleteEntity(document.uuid);
-        if (document.flags['monks-enhanced-journal']?.type == 'quest' && ui.controls.activeControl == 'notes' && setting('show-objectives'))
+        if (document.flags['monks-enhanced-journal']?.type ==mission' && ui.controls.activeControl == 'notes' && setting('show-objectives'))
             MonksEnhancedJournal.refreshObjectives(true);
     }
 });
@@ -3935,7 +3935,7 @@ Hooks.on('renderSceneControls', (controls) => {
 });
 
 Hooks.on('dropActorSheetData', (actor, sheet, data) => {
-    //check to see if an item was dropped from either the encounter or quest and record what actor it was
+    //check to see if an item was dropped from either the encounter or mission and record what actor it was
     if (MonksEnhancedJournal._dragItem && data.itemId == MonksEnhancedJournal._dragItem) {
         MonksEnhancedJournal._dragItem = null;
 
@@ -3989,7 +3989,7 @@ Hooks.on('dropJournalSheetData', (journal, sheet, data) => {
 });
 
 Hooks.on('dropCanvasData', async (canvas, data) => {
-    //check to see if an item was dropped from either the encounter or quest and record what actor it was
+    //check to see if an item was dropped from either the encounter or mission and record what actor it was
     if (MonksEnhancedJournal.journal) {
         if (data.type == 'JournalTab' && data.uuid) {
             let document = await fromUuid(data.uuid);
@@ -4474,8 +4474,8 @@ Hooks.on('updateWorldTime', async (worldTime) => {
 
 Hooks.on("setupTileActions", (app) => {
     app.registerTileGroup('monks-enhanced-journal', i18n("MonksEnhancedJournal.Title"));
-    app.registerTileAction('monks-enhanced-journal', 'completequest', {
-        name: i18n("MonksEnhancedJournal.ChangeQuestStatus"),
+    app.registerTileAction('monks-enhanced-journal', 'completemission', {
+        name: i18n("MonksEnhancedJournal.ChangeMissionStatus"),
         ctrls: [
             {
                 id: "entity",
@@ -4498,10 +4498,10 @@ Hooks.on("setupTileActions", (app) => {
         group: 'monks-enhanced-journal',
         values: {
             'status': {
-                "inactive": "MonksEnhancedJournal.queststatus.unavailable",
-                "available": "MonksEnhancedJournal.queststatus.available",
-                "completed": "MonksEnhancedJournal.queststatus.completed",
-                "failed": "MonksEnhancedJournal.queststatus.failed"
+                "inactive": "MonksEnhancedJournal.missionstatus.unavailable",
+                "available": "MonksEnhancedJournal.missionstatus.available",
+                "completed": "MonksEnhancedJournal.missionstatus.completed",
+                "failed": "MonksEnhancedJournal.missionstatus.failed"
             }
         },
         fn: async (args = {}) => {

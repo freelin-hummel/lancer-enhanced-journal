@@ -44,7 +44,7 @@ And Journal Entries that contain text descriptions have a search box that will s
 
 ## New Journal Entry Types
 
-Along with the regular journal entry, you can now create entries that are just a picture, represent a person, place, quest, encounter, and can create a slideshow for a multimedia presentation for your players.
+Along with the regular journal entry, you can now create entries that are just a picture, represent a person, place, mission, encounter, and can create a slideshow for a multimedia presentation for your players.
 Specific icons for each journal type are added to both the standard Journal Directory and the Journal Directory on the Enhanced Journal window so that you can see at a glance what type each entry represents.
 
 ### Picture
@@ -100,11 +100,11 @@ Clicking on the Plus tool button will add another slide.  You can customise a sl
 
 When you wish to play the slideshow, press the play button and it will be displayed on the players screen and begin the animations.  The current slide will be shown in the journal window, with the remaining slides showing along the bottom.  Clicking on the slides along the bottom will show that specific slide, if the display length of a slide has been set to manual, then click the slide to advance to the next one, and right-click to reverse a slide.  A progress bar along the top will show you how much time is left in the slide before the next one is shown.
 
-### Quest
+### Mission
 
 ![monks-enhanced-journal](/screenshots/quest1.png)
 
-The represents potential side quests that your player could complete.  Quest status is also color coded on the Directory so you can see at a glace what the current status of the Quest is.
+The represents potential side missions that your player could complete.  Mission status is also color coded on the Directory so you can see at a glace what the current status of the Mission is.
 
 ![monks-enhanced-journal](/screenshots/quest3.png)
 
@@ -112,11 +112,11 @@ New for 1.0.7 Objectives have been added.
 
 ![monks-enhanced-journal](/screenshots/objectives.png)
 
-When the Notes tool is selected, players can view the objectives of any In Progress quests.
+When the Notes tool is selected, players can view the objectives of any In Progress missions.
 
 ![monks-enhanced-journal](/screenshots/quest2.png)
 
-You can also set the rewards that are gained by completing this quest.  To add an item, drag the item icon on the journal page.
+You can also set the rewards that are gained by completing this mission.  To add an item, drag the item icon on the journal page.
 You can also drag an item off this list, onto an actor and it will register which actor that item has been handed off to.
 
 ### Checklist

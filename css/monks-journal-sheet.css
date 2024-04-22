@@ -1253,12 +1253,12 @@ body:not(.system-pf2e) .monks-journal-sheet .sheet-container .tag {
     top: var(--mej-context-y);
 }
 
-/* Quest */
-.monks-journal-sheet.sheet .quest-container .reward-container {
+/* Mission */
+.monks-journal-sheet.sheetmission-container .reward-container {
     overflow: hidden;
     border-top: 1px solid var(--mej-header-border-color);
 }
-.monks-journal-sheet.sheet .quest-container .items-list.objective-items li.item {
+.monks-journal-sheet.sheetmission-container .items-list.objective-items li.item {
     padding: 5px;
 }
 
@@ -1267,7 +1267,7 @@ body:not(.system-pf2e) .monks-journal-sheet .sheet-container .tag {
     border-bottom: 1px solid var(--color-underline-header);
 }
 
-.monks-journal-sheet .quest-container .tab.rewards .items-list li.instruction {
+.monks-journal-sheetmission-container .tab.rewards .items-list li.instruction {
     height: calc(100% - 250px);
 }
 
@@ -2008,27 +2008,27 @@ body:not(.system-pf2e) .monks-journal-sheet .sheet-container .tag {
     right: -1px;
 }
 
-#objective-display .objective-list > li[status] .quest-name {
-    border-bottom: 2px solid var(--mej-quest-status-default);
+#objective-display .objective-list > li[status]mission-name {
+    border-bottom: 2px solid var(--mej-mission-status-default);
     width: 100%;
-    border-left: 2px solid var(--mej-quest-status-default);
+    border-left: 2px solid var(--mej-mission-status-default);
     padding-left: 4px;
 }
 
-#objective-display .objective-list > li[status='available'] .quest-name {
-    border-color: var(--mej-quest-status-available);
+#objective-display .objective-list > li[status='available']mission-name {
+    border-color: var(--mej-mission-status-available);
 }
 
-#objective-display .objective-list > li[status='inprogress'] .quest-name {
-    border-color: var(--mej-quest-status-inprogress);
+#objective-display .objective-list > li[status='inprogress']mission-name {
+    border-color: var(--mej-mission-status-inprogress);
 }
 
-#objective-display .objective-list > li[status='completed'] .quest-name {
-    border-color: var(--mej-quest-status-completed);
+#objective-display .objective-list > li[status='completed']mission-name {
+    border-color: var(--mej-mission-status-completed);
 }
 
-#objective-display .objective-list > li[status='failed'] .quest-name {
-    border-color: var(--mej-quest-status-failed);
+#objective-display .objective-list > li[status='failed']mission-name {
+    border-color: var(--mej-mission-status-failed);
 }
 
 /*

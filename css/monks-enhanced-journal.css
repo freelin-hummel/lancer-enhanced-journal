@@ -99,11 +99,11 @@
     --mej-objective-header-background: rgba(255, 255, 255, 0.2);
     --mej-objective-header-border: rgba(255, 255, 255, 0.3);
     --mej-objective-item-border: rgba(255, 255, 255, 0.2);
-    --mej-quest-status-default: rgb(128, 128, 128);
-    --mej-quest-status-available: rgb(47, 150, 180);
-    --mej-quest-status-inprogress: rgb(248, 148, 6);
-    --mej-quest-status-completed: rgb(81, 163, 81);
-    --mej-quest-status-failed: rgb(189, 54, 47);
+    --mej-mission-status-default: rgb(128, 128, 128);
+    --mej-mission-status-available: rgb(47, 150, 180);
+    --mej-mission-status-inprogress: rgb(248, 148, 6);
+    --mej-mission-status-completed: rgb(81, 163, 81);
+    --mej-mission-status-failed: rgb(189, 54, 47);
     --mej-slideshow-add-slide: rgba(0, 0, 0, 0.2);
     --mej-slideshow-duration-border: rgb(0, 24, 74);
     --mej-slideshow-duration-background: rgba(0, 0, 0, 0.5);
@@ -726,28 +726,28 @@
 
 #journal li.journalentry[status] .document-name,
 .monks-enhanced-journal .sidebar-directory li.journalentry[status] .document-name {
-    border-left: 0.45em solid var(--mej-quest-status-default);
+    border-left: 0.45em solid var(--mej-mission-status-default);
     margin-left: 0px;
 }
 
 #journal li.journalentry[status='available'] .document-name,
 .monks-enhanced-journal .sidebar-directory li.journalentry[status='available'] .document-name {
-    border-left-color: var(--mej-quest-status-available);
+    border-left-color: var(--mej-mission-status-available);
 }
 
 #journal li.journalentry[status='inprogress'] .document-name,
 .monks-enhanced-journal .sidebar-directory li.journalentry[status='inprogress'] .document-name {
-    border-left-color: var(--mej-quest-status-inprogress);
+    border-left-color: var(--mej-mission-status-inprogress);
 }
 
 #journal li.journalentry[status='completed'] .document-name,
 .monks-enhanced-journal .sidebar-directory li.journalentry[status='completed'] .document-name {
-    border-left-color: var(--mej-quest-status-completed);
+    border-left-color: var(--mej-mission-status-completed);
 }
 
 #journal li.journalentry[status='failed'] .document-name,
 .monks-enhanced-journal .sidebar-directory li.journalentry[status='failed'] .document-name {
-    border-left-color: var(--mej-quest-status-failed);
+    border-left-color: var(--mej-mission-status-failed);
 }
 
 .sidebar-tab.directory .directory-item.journalentry .permissions {

@@ -33,7 +33,7 @@
   "MonksEnhancedJournal.SearchJournalEntry": "Cerca Voce del Diario",
   "MonksEnhancedJournal.SearchPersonDescription": "Cerca Descrizione Persona",
   "MonksEnhancedJournal.SearchPlaceDescription": "Cerca Descrizione Luogo",
-  "MonksEnhancedJournal.SearchQuestDescription": "Cerca Descrizione Missione",
+  "MonksEnhancedJournal.SearchMissionDescription": "Cerca Descrizione Missione",
   "MonksEnhancedJournal.SearchOrganizationDescription": "Cerca Descrizione Organizzazione",
   "MonksEnhancedJournal.SearchShopDescription": "Cerca Descrizione Negozio",
   "MonksEnhancedJournal.ShowToPlayers": "Mostra ai Giocatori",
@@ -89,7 +89,7 @@
   "MonksEnhancedJournal.PlaceName": "NomeLuogo",
   "MonksEnhancedJournal.Government": "Governo",
   "MonksEnhancedJournal.Size": "Dimensione",
-  "MonksEnhancedJournal.QuestName": "NomeMissione",
+  "MonksEnhancedJournal.MissionName": "NomeMissione",
   "MonksEnhancedJournal.Source": "Origine",
   "MonksEnhancedJournal.Status": "Status",
   "MonksEnhancedJournal.Rewards": "Ricompense",
@@ -177,7 +177,7 @@
   "MonksEnhancedJournal.place": "Luogo",
   "MonksEnhancedJournal.poi": "Punto d'Interesse",
   "MonksEnhancedJournal.city": "Cità",
-  "MonksEnhancedJournal.quest": "Missione",
+  "MonksEnhancedJournal.mission": "Missione",
   "MonksEnhancedJournal.encounter": "Incontro",
   "MonksEnhancedJournal.shop": "Negozio",
 
@@ -185,9 +185,9 @@
   "MonksEnhancedJournal.purchasing.confirm": "Conferma GM",
   "MonksEnhancedJournal.purchasing.free": "GM o Giocatore",
 
-  "MonksEnhancedJournal.queststatus.notactive": "Inattiva",
-  "MonksEnhancedJournal.queststatus.available": "Disponibile",
-  "MonksEnhancedJournal.queststatus.inprogress": "In Corso",
-  "MonksEnhancedJournal.queststatus.completed": "Completata",
-  "MonksEnhancedJournal.queststatus.failed": "Fallita"
+  "MonksEnhancedJournal.missionstatus.notactive": "Inattiva",
+  "MonksEnhancedJournal.missionstatus.available": "Disponibile",
+  "MonksEnhancedJournal.missionstatus.inprogress": "In Corso",
+  "MonksEnhancedJournal.missionstatus.completed": "Completata",
+  "MonksEnhancedJournal.missionstatus.failed": "Fallita"
 }

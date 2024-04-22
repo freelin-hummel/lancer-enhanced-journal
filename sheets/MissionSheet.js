@@ -1,9 +1,9 @@
 import { Objectives } from "../apps/objectives.js";
 import { setting, i18n, log, makeid, MonksEnhancedJournal, quantityname, pricename, currencyname } from "../monks-enhanced-journal.js";
-import { EnhancedJournalSheet } from "../sheets/EnhancedJournalSheet.js";
+import { EnhancedJournalSheet } from "./EnhancedJournalSheet.js";
 import { getValue, setValue, MEJHelpers } from "../helpers.js";
 
-export class QuestSheet extends EnhancedJournalSheet {
+export class MissionSheet extends EnhancedJournalSheet {
     constructor(data, options) {
         super(data, options);
 
@@ -13,14 +13,14 @@ export class QuestSheet extends EnhancedJournalSheet {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            title: i18n("MonksEnhancedJournal.quest"),
-            template: "modules/monks-enhanced-journal/templates/sheets/quest.html",
+            title: i18n("MonksEnhancedJournal.mission"),
+            template: "modules/monks-enhanced-journal/templates/sheets/mission.html",
             tabs: [{ navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description" }],
             dragDrop: [
-                { dragSelector: ".document.actor", dropSelector: ".quest-container" },
-                { dragSelector: ".document.item", dropSelector: ".quest-container" },
+                { dragSelector: ".document.actor", dropSelector: ".mission-container" },
+                { dragSelector: ".document.item", dropSelector: ".mission-container" },
                 { dragSelector: ".reward-items .item-list .item .item-name", dropSelector: "null" },
-                { dragSelector: ".objective-items .item-list .item", dropSelector: ".quest-container" },
+                { dragSelector: ".objective-items .item-list .item", dropSelector: ".mission-container" },
                 { dragSelector: ".sheet-icon", dropSelector: "#board" }
             ],
             scrollY: [".objective-items", ".reward-container .reward-items > .item-list", ".tab.description .tab-inner"]
@@ -33,10 +33,10 @@ export class QuestSheet extends EnhancedJournalSheet {
         data.showtoplayers = this.object.parent.ownership["default"] >= CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER;
 
         data.statusOptions = {
-            inactive: "MonksEnhancedJournal.queststatus.unavailable",
-            available: "MonksEnhancedJournal.queststatus.available",
-            completed: "MonksEnhancedJournal.queststatus.completed",
-            failed: "MonksEnhancedJournal.queststatus.failed"
+            inactive: "MonksEnhancedJournal.missionstatus.unavailable",
+            available: "MonksEnhancedJournal.missionstatus.available",
+            completed: "MonksEnhancedJournal.missionstatus.completed",
+            failed: "MonksEnhancedJournal.missionstatus.failed"
         };
 
         data.objectives = await Promise.all(duplicate(this.object.flags["monks-enhanced-journal"].objectives || [])?.filter(o => {
@@ -112,7 +112,7 @@ export class QuestSheet extends EnhancedJournalSheet {
 
     /*
     get allowedRelationships() {
-        return ['person', 'quest'];
+        return ['person',mission'];
     }*/
 
     convertRewards() {
@@ -161,7 +161,7 @@ export class QuestSheet extends EnhancedJournalSheet {
     }
 
     get type() {
-        return 'quest';
+        returnmission';
     }
 
     _documentControls() {
@@ -553,7 +553,7 @@ export class QuestSheet extends EnhancedJournalSheet {
 
             let itemData = item.toObject();
             if ((itemData.type === "spell") && game.system.id == 'dnd5e') {
-                itemData = await QuestSheet.createScrollFromSpell(itemData);
+                itemData = await MissionSheet.createScrollFromSpell(itemData);
             }
 
             let rewards = duplicate(this.getRewardData());
@@ -611,7 +611,7 @@ export class QuestSheet extends EnhancedJournalSheet {
                 let item = items.find(i => i._id == id);
                 if (item) {
                     let max = getProperty(item, "flags.monks-enhanced-journal.remaining");
-                    let result = await QuestSheet.confirmQuantity(item, max, "transfer", false);
+                    let result = await MissionSheet.confirmQuantity(item, max, "transfer", false);
                     if ((result?.quantity ?? 0) > 0) {
                         if (getProperty(item, "flags.monks-enhanced-journal.remaining") < result?.quantity) {
                             ui.notifications.warn(i18n("MonksEnhancedJournal.msg.CannotTransferItemQuantity"));

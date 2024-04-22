@@ -10,7 +10,7 @@ export class ObjectiveDisplay extends Application {
         let pos = game.user.getFlag("monks-enhanced-journal", "objectivePos");
         return mergeObject(super.defaultOptions, {
             id: "objective-display",
-            title: i18n("MonksEnhancedJournal.Quests"),
+            title: i18n("MonksEnhancedJournal.Missions"),
             template: "modules/monks-enhanced-journal/templates/objective-display.html",
             width: pos?.width || 500,
             height: "auto",
@@ -21,11 +21,11 @@ export class ObjectiveDisplay extends Application {
     }
 
     getData(options) {
-        let quests = game.journal.filter(j => {
+        let missions = game.journal.filter(j => {
             if (j.pages.size != 1)
                 return false;
             let page = j.pages.contents[0];
-            return getProperty(page, 'flags.monks-enhanced-journal.type') == 'quest' &&
+            return getProperty(page, 'flags.monks-enhanced-journal.type') ==mission' &&
                 j.testUserPermission(game.user, "OBSERVER") &&
                 page.getFlag('monks-enhanced-journal', 'display');
         }).map(q => {
@@ -54,7 +54,7 @@ export class ObjectiveDisplay extends Application {
             return data;
         });
 
-        return mergeObject(super.getData(options), { quests: quests } );
+        return mergeObject(super.getData(options), { missions: missions } );
     }
 
     async _render(force, options) {
@@ -68,10 +68,10 @@ export class ObjectiveDisplay extends Application {
     activateListeners(html) {
         super.activateListeners(html);
 
-        $('li[data-document-id]', html).on("click", this.openQuest.bind(this));
+        $('li[data-document-id]', html).on("click", this.openMission.bind(this));
     }
 
-    async openQuest(event) {
+    async openMission(event) {
         let id = event.currentTarget.dataset.documentId;
         let page = await fromUuid(id);
         MonksEnhancedJournal.openJournalEntry(page);
