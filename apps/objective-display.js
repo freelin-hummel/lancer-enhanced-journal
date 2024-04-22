@@ -25,7 +25,7 @@ export class ObjectiveDisplay extends Application {
             if (j.pages.size != 1)
                 return false;
             let page = j.pages.contents[0];
-            return getProperty(page, 'flags.monks-enhanced-journal.type') ==mission' &&
+            return getProperty(page, 'flags.monks-enhanced-journal.type') =='mission' &&
                 j.testUserPermission(game.user, "OBSERVER") &&
                 page.getFlag('monks-enhanced-journal', 'display');
         }).map(q => {

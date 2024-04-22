@@ -437,7 +437,7 @@ export class MonksEnhancedJournal {
                 ...ownership.map(([name, level]) => ({ level, label: `OWNERSHIP.${name}` }))
             ];
             MonksEnhancedJournal.fixType(doc);
-            let hasImage = (doc instanceof JournalEntryPage) && ((["loot", "organization", "person", "place", "poi",mission", "shop", "picture"].includes(doc.type) || (doc.type === "image")) && !!doc.src);
+            let hasImage = (doc instanceof JournalEntryPage) && ((["loot", "organization", "person", "place", "poi","mission", "shop", "picture"].includes(doc.type) || (doc.type === "image")) && !!doc.src);
 
             let showAs = doc.getFlag("monks-enhanced-journal", "showAs") || (doc.type == "image" ? "image" : options?.showAs || "journal");
             if (!hasImage && showAs != "journal")
@@ -1589,9 +1589,9 @@ export class MonksEnhancedJournal {
 
         for (let journal of game.journal) {
             let type = journal.getFlag('monks-enhanced-journal', 'type');
-            if (["shop", "encounter",mission"].includes(type)) {
+            if (["shop", "encounter","mission"].includes(type)) {
                 isFix = false;
-                if (type ==mission") {
+                if (type =="mission") {
                     let rewardFix = false;
                     let rewards = duplicate(journal.getFlag('monks-enhanced-journal', 'rewards') || []);
                     for (let reward of rewards) {
@@ -1666,7 +1666,7 @@ export class MonksEnhancedJournal {
                 }
 
                 //cheak to make sure the relationships go both ways
-                if (["person", "place", "organization", "shop",mission"].includes(journal.type)) {
+                if (["person", "place", "organization", "shop","mission"].includes(journal.type)) {
                     let relationships = journal.getFlag('monks-enhanced-journal', 'relationships') || [];
                     for (let relationship of relationships) {
                         let other = game.journal.get(relationship.id);
@@ -2379,7 +2379,7 @@ export class MonksEnhancedJournal {
             case 'slideshow': return 'fa-photo-video';
             case 'encounter': return 'fa-toolbox';
             case 'event': return 'fa-calendar-days';
-            casemission': return 'fa-map-signs';
+            case 'mission': return 'fa-map-signs';
             case 'journalentry': return 'fa-book-open';
             case 'actor': return 'fa-users';
             case 'organization': return 'fa-flag';
@@ -2759,7 +2759,7 @@ export class MonksEnhancedJournal {
             let missions = $('<ul>');
             //find all in progress missions
             for (let mission of game.journal) {
-                ifmission.getFlag('monks-enhanced-journal', 'type') ==mission' && mission.testUserPermission(game.user, "OBSERVER") && mission.getFlag('monks-enhanced-journal', 'display') && mission.getFlag('monks-enhanced-journal', 'display')) {
+                ifmission.getFlag('monks-enhanced-journal', 'type') =='mission' && mission.testUserPermission(game.user, "OBSERVER") && mission.getFlag('monks-enhanced-journal', 'display') && mission.getFlag('monks-enhanced-journal', 'display')) {
                     //find all objectives
                     let objectives = $('<ul>');
                     $('<li>')
@@ -2867,7 +2867,7 @@ export class MonksEnhancedJournal {
                             }
                         }).appendTo(pageList);
 
-                    if (pageType ==mission') {
+                    if (pageType =='mission') {
                         //let ownership = entry.ownership.default;
                         //let completed = entry.getFlag('monks-enhanced-journal', 'completed');
                         let status = page.getFlag('monks-enhanced-journal', 'status') || (page.getFlag('monks-enhanced-journal', 'completed') ? 'completed' : 'inactive');
@@ -2877,7 +2877,7 @@ export class MonksEnhancedJournal {
                 ui.journal._dragDrop.forEach(d => d.bind(pageList[0]));
             }*/
 
-            if (type ==mission') {
+            if (type =='mission') {
                 //let ownership = entry.ownership.default;
                 //let completed = entry.getFlag('monks-enhanced-journal', 'completed');
                 let page = document.pages.contents[0];
@@ -3879,7 +3879,7 @@ Hooks.on("updateJournalEntry", (document, data, options, userId) => {
 
 Hooks.on("updateJournalEntryPage", (document, data, options, userId) => {
     let type = getProperty(document, 'flags.monks-enhanced-journal.type');
-    if (type ==mission')
+    if (type =='mission')
         MonksEnhancedJournal.refreshObjectives(true);
 
     if (data.name && type && document.parent.pages.size == 1) {
@@ -3925,7 +3925,7 @@ Hooks.on("updateJournalEntryPage", (document, data, options, userId) => {
 Hooks.on("deleteJournalEntry", (document, html, userId) => {
     if (MonksEnhancedJournal.journal) {
         MonksEnhancedJournal.journal.deleteEntity(document.uuid);
-        if (document.flags['monks-enhanced-journal']?.type ==mission' && ui.controls.activeControl == 'notes' && setting('show-objectives'))
+        if (document.flags['monks-enhanced-journal']?.type =='mission' && ui.controls.activeControl == 'notes' && setting('show-objectives'))
             MonksEnhancedJournal.refreshObjectives(true);
     }
 });

@@ -92,7 +92,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
     }
 
     get allowedRelationships() {
-        return ["encounter", "loot", "organization", "person", "place", "poi", "event",mission", "shop"];
+        return ["encounter", "loot", "organization", "person", "place", "poi", "event","mission", "shop"];
     }
 
     _canUserView(user) {
@@ -991,7 +991,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
         if (Object.keys(formData).length == 0)
             return;
 
-        if (this.type ==mission') {
+        if (this.type =='mission') {
             $(`li[data-document-id="${this.object.id}"]`, '#journal,#journal-directory').attr('status', formData.flags['monks-enhanced-journal'].status);
         }
 
@@ -1578,7 +1578,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
         let id = $(event.currentTarget).closest('li').attr('data-id');
         let items = (this.object.getFlag('monks-enhanced-journal', 'items') || []);
 
-        if (this.type ==mission") {
+        if (this.type =="mission") {
             let rewards = this.getRewardData();
             if (rewards.length) {
                 let reward = this.getReward(rewards);
@@ -1634,7 +1634,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
             try {
                 let result = sheet.render(true, { focus: true });
                 result.options.alterprice = true;
-                //result.options.addremaining = (this.object.type == "encounter" || this.object.type ==mission");
+                //result.options.addremaining = (this.object.type == "encounter" || this.object.type =="mission");
                 result.options.addcost = (this.object.type == "shop");
             } catch {
                 ui.notifications.warn(i18n("MonksEnhancedJournal.msg.ErrorTryingToEdit"));
@@ -1720,7 +1720,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
                     else if (clear == "notlocked")
                         items = items.filter((i) => getProperty(i, "flags.monks-enhanced-journal.lock"));
 
-                    if (that.object.getFlag('monks-enhanced-journal', "type") ==mission") {
+                    if (that.object.getFlag('monks-enhanced-journal', "type") =="mission") {
                         let rewardId = that.object.getFlag('monks-enhanced-journal', "reward");
                         let rewards = that.object.getFlag('monks-enhanced-journal', "rewards");
                         let reward = rewards.find(r => r.id == rewardId || r.active);
@@ -1865,7 +1865,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
                     }
 
                     if (items.length > 0) {
-                        if (that.object.getFlag('monks-enhanced-journal', "type") ==mission") {
+                        if (that.object.getFlag('monks-enhanced-journal', "type") =="mission") {
                             let rewardId = that.object.getFlag('monks-enhanced-journal', "reward");
                             let rewards = that.object.getFlag('monks-enhanced-journal', "rewards");
                             let reward = rewards.find(r => r.id == rewardId || r.active);
